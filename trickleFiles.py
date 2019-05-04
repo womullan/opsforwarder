@@ -10,6 +10,7 @@ womullan 2019
 import os
 import time
 import argparse
+import datetime
 
 
 def doCopy(inDir, outDir, interval, verbose):
@@ -29,16 +30,20 @@ def doCopy(inDir, outDir, interval, verbose):
     count = 0
     if not interval:
         interval = 5
-    if verbose:
-        print("from {} to {} with {} s".format(inDir, outDir, interval))
+    if verbose > 0:
+        timestamp = datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S")
+        print("{} from {} to {} with {} s".format(timestamp, inDir, outDir, interval))
     filelist = os.listdir(inDir)
     for fn in filelist:
-        scpCmd = 'scp {} {}'.format(fn, outDir)
+        scpCmd = 'scp {}/{} {}'.format(inDir,fn, outDir)
         count = count + 1
-        if verbose:
+        if verbose > 1:
             print(str(scpCmd))
         os.system(scpCmd)
         time.sleep(interval)
+    if verbose > 0:
+        timestamp = datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S")
+        print("Finished {} ".format(timestamp))
     # End doCopy
 
 
@@ -50,8 +55,8 @@ if __name__ == "__main__":
 
     parser.add_argument('inDir', help='inputDirectory to process')
     parser.add_argument('outDir', help='outDirectory form user@host:dir')
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help=' Print anoying messages ')
+    parser.add_argument('-v', '--verbose', type=int, default=0,
+                        help=' Print anoying messages value 1 or 2 ')
     parser.add_argument('-i', '--interval', type=int,
                         help='Seconds between transfers ')
 
