@@ -37,7 +37,7 @@ def doCopy(inDir, outDir, interval, verbose):
         count = count + 1
         if verbose:
             print(str(scpCmd))
-            print('Sleeping {} second'.format(interval))
+        os.system(scpCmd)
         time.sleep(interval)
     # End doCopy
 
