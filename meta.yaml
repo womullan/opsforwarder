@@ -1,0 +1,16 @@
+
+package:
+  name: opsforwarder
+  version: 1.0.1
+
+build:
+  noarch: python
+  number: 1
+  #script: $PYTHON setup.py install
+
+requirements:
+  run:
+    - python
+about:
+  summary: see the readme 
+

@@ -29,7 +29,7 @@ def doCopy(inDir, outDir, interval, verbose):
     """
     count = 0
     if not interval:
-        interval = 5
+        interval = 0
     if verbose > 0:
         timestamp = datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S")
         print("{} from {} to {} with {} s".format(timestamp, inDir, outDir, interval))
